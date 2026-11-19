@@ -173,17 +173,18 @@ def simulate(design, p_crash, runs, seed):
 
 def to_table(results):
     by = {(r["design"], r["p_crash_per_step"]): r for r in results}
+    rates = " / ".join(f"{p:.0%}" for p in CRASH_RATES)
     lines = [
-        "| Design | Dup/1,000 runs @1% | @5% | @10% | Runs with a duplicate @1% | Extra step executions @5% |",
-        "| --- | --- | --- | --- | --- | --- |",
+        f"| Design | Dup/1,000 runs ({rates}) | Runs with a duplicate ({rates}) | Extra step executions ({rates}) |",
+        "| --- | --- | --- | --- |",
     ]
     for d in DESIGNS:
-        dup = [by[(d, p)]["duplicate_side_effects_per_1000_runs"] for p in CRASH_RATES]
-        lines.append(
-            f"| {d} | {dup[0]:g} | {dup[1]:g} | {dup[2]:g} | "
-            f"{by[(d, 0.01)]['runs_with_any_duplicate_pct']}% | "
-            f"{by[(d, 0.05)]['extra_step_executions_pct']}% |"
-        )
+        cells = []
+        for key, unit in (("duplicate_side_effects_per_1000_runs", ""),
+                          ("runs_with_any_duplicate_pct", "%"),
+                          ("extra_step_executions_pct", "%")):
+            cells.append(" / ".join(f"{by[(d, p)][key]:g}{unit}" for p in CRASH_RATES))
+        lines.append(f"| {d} | " + " | ".join(cells) + " |")
     return "\n".join(lines)
 
 

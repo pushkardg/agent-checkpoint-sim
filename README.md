@@ -83,10 +83,13 @@ From `python seed_sweep.py --json results_seeds.json`. Mean (min-max) across see
 | idempotency_key | 0.7 (0.7-0.8) | 3.9 (3.9-3.9) | 8.1 (8.1-8.1) |
 | started_record_status_check | 0.7 (0.7-0.8) | 3.9 (3.9-3.9) | 8.1 (8.1-8.1) |
 
-{0.01: {'NOT_APPLIED': 703, 'APPLIED': 765}, 0.05: {'APPLIED': 3939, 'NOT_APPLIED': 3707}, 0.1: {'APPLIED': 8109, 'NOT_APPLIED': 7912}}
 #### Status-check branch counts (seed 42, 100,000 runs)
 
-``
+| Crash rate | APPLIED (skip) | NOT_APPLIED (replay) |
+| --- | --- | --- |
+| 1% | 765 | 703 |
+| 5% | 3,939 | 3,707 |
+| 10% | 8,109 | 7,912 |
 
 The `NOT_APPLIED` branch runs whenever a crash lands after the started marker but before the call; the step is then replayed from the persisted request.
 
