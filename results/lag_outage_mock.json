@@ -1,0 +1,51 @@
+{
+ "config": {
+  "runs": 200,
+  "designs": [
+   "idem_op",
+   "status_check"
+  ],
+  "model": "mock",
+  "mock_latency": 0.0,
+  "crash_p": 0.05,
+  "lost_response_p": 0.05,
+  "status_lag": 0.5,
+  "status_outage_p": 0.05,
+  "max_restarts": 50,
+  "seed": 42,
+  "workdir": null,
+  "json": "results/lag_outage_mock.json"
+ },
+ "results": [
+  {
+   "design": "idem_op",
+   "runs": 200,
+   "completed": 200,
+   "parked": 0,
+   "duplicate_effects": 0,
+   "runs_with_duplicate": 0,
+   "conflicts_409": 0,
+   "restarts": 74,
+   "model_calls": 1004,
+   "model_calls_per_run": 5.02,
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "median_run_seconds": 0.077
+  },
+  {
+   "design": "status_check",
+   "runs": 200,
+   "completed": 199,
+   "parked": 1,
+   "duplicate_effects": 36,
+   "runs_with_duplicate": 29,
+   "conflicts_409": 0,
+   "restarts": 74,
+   "model_calls": 1003,
+   "model_calls_per_run": 5.01,
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "median_run_seconds": 0.078
+  }
+ ]
+}
