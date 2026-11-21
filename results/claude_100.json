@@ -1,0 +1,98 @@
+{
+ "config": {
+  "runs": 100,
+  "designs": [
+   "checkpoint_only",
+   "idem_args",
+   "idem_op_regen",
+   "idem_op",
+   "status_check"
+  ],
+  "model": "claude",
+  "mock_latency": 0.0,
+  "crash_p": 0.05,
+  "lost_response_p": 0.05,
+  "status_lag": 0.0,
+  "status_outage_p": 0.0,
+  "max_restarts": 50,
+  "seed": 42,
+  "workdir": null,
+  "json": "results/claude_100_run4.json"
+ },
+ "results": [
+  {
+   "design": "checkpoint_only",
+   "runs": 100,
+   "completed": 100,
+   "parked": 0,
+   "duplicate_effects": 20,
+   "runs_with_duplicate": 15,
+   "conflicts_409": 0,
+   "restarts": 36,
+   "model_calls": 525,
+   "model_calls_per_run": 5.25,
+   "input_tokens": 394419,
+   "output_tokens": 51919,
+   "median_run_seconds": 29.484
+  },
+  {
+   "design": "idem_args",
+   "runs": 100,
+   "completed": 100,
+   "parked": 0,
+   "duplicate_effects": 13,
+   "runs_with_duplicate": 11,
+   "conflicts_409": 0,
+   "restarts": 36,
+   "model_calls": 524,
+   "model_calls_per_run": 5.24,
+   "input_tokens": 393680,
+   "output_tokens": 51604,
+   "median_run_seconds": 29.491
+  },
+  {
+   "design": "idem_op_regen",
+   "runs": 100,
+   "completed": 94,
+   "parked": 6,
+   "duplicate_effects": 0,
+   "runs_with_duplicate": 0,
+   "conflicts_409": 6,
+   "restarts": 36,
+   "model_calls": 502,
+   "model_calls_per_run": 5.02,
+   "input_tokens": 376826,
+   "output_tokens": 49214,
+   "median_run_seconds": 33.618
+  },
+  {
+   "design": "idem_op",
+   "runs": 100,
+   "completed": 100,
+   "parked": 0,
+   "duplicate_effects": 0,
+   "runs_with_duplicate": 0,
+   "conflicts_409": 0,
+   "restarts": 36,
+   "model_calls": 502,
+   "model_calls_per_run": 5.02,
+   "input_tokens": 377659,
+   "output_tokens": 49701,
+   "median_run_seconds": 39.001
+  },
+  {
+   "design": "status_check",
+   "runs": 100,
+   "completed": 100,
+   "parked": 0,
+   "duplicate_effects": 0,
+   "runs_with_duplicate": 0,
+   "conflicts_409": 0,
+   "restarts": 36,
+   "model_calls": 502,
+   "model_calls_per_run": 5.02,
+   "input_tokens": 377565,
+   "output_tokens": 49964,
+   "median_run_seconds": 38.75
+  }
+ ]
