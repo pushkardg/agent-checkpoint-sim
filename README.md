@@ -55,7 +55,21 @@ python -m proto.runner --runs 30 --model claude --json results/baseline_claude.j
 
 With `--model claude`, each run makes about five API calls, so 30 runs across five designs is roughly 750 calls. Token counts are recorded in the usage log in the work directory.
 
-## Results (mock model, seed 42, 200 runs per design)
+## Results with Claude (claude-haiku-5-5, seed 42, 100 runs per design)
+
+`python -m proto.runner --runs 100 --model claude --json results/claude_100.json`, with `--crash-p 0.05 --lost-response-p 0.05`
+
+| Design | Duplicate effects | Runs with a duplicate | 409 conflicts | Parked runs | Completed | Model calls / run |
+| --- | --- | --- | --- | --- | --- | --- |
+| checkpoint_only | 20 | 15 | 0 | 0 | 100 | 5.25 |
+| idem_args | 13 | 11 | 0 | 0 | 100 | 5.24 |
+| idem_op_regen | 0 | 0 | 6 | 6 | 94 | 5.02 |
+| idem_op | 0 | 0 | 0 | 0 | 100 | 5.02 |
+| status_check | 0 | 0 | 0 | 0 | 100 | 5.02 |
+
+Designs ran one after another, so wall-clock times are confounded with API latency drift and are not compared here.
+
+## Results with the mock model (seed 42, 200 runs per design)
 
 **Baseline:** `--crash-p 0.05 --lost-response-p 0.05`
 
@@ -85,7 +99,8 @@ Raw results are in `results/`.
 
 ## Limitations
 
-- Results above use the offline mock model. With Claude, the size of the `idem_args` effect depends on how much the model's wording varies between calls.
+- With Claude, argument-derived keys removed about a third of duplicates (20 to 13), because Claude sometimes regenerated identical arguments on retry. The size of this effect depends on the model and its sampling settings.
+- 100 runs per design with Claude gives clear differences but small counts.
 - One logical operation per step, so the operation sequence number is always 0.
 - Single service, single worker at a time; no concurrent workers or lease expiry.
 - Crash boundaries are uniform; real failures cluster around slow calls and timeouts.
